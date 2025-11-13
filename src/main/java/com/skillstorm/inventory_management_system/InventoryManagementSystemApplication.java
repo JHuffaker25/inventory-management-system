@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class InventoryManagementSystemApplication {
 
 	public static void main(String[] args) {
-		 ApplicationContext context = (ApplicationContext) SpringApplication.run(InventoryManagementSystemApplication.class, args);
+	 SpringApplication.run(InventoryManagementSystemApplication.class, args);
 	}
 
 }
