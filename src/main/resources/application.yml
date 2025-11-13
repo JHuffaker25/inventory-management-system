@@ -1,0 +1,13 @@
+spring:
+    application:
+        name: inventory-management-system
+
+    output:
+        ansi:
+            enabled: always
+
+
+
+server:
+    port: 8282
+
