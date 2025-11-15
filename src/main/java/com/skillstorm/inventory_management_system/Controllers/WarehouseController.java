@@ -20,16 +20,10 @@ public class WarehouseController {
         this.warehouseService = warehouseService;
     }
 
-    //!!!!!!!!!!!!!!!DELETE THIS!!!!!!!!!!!!!!!!!
-    @GetMapping("/gettest")
-    public String message(){
+    
 
-        return "THIS IS A GET TEST URL, IT WORKED!!!";
-
-    }
-
-    //
-    @GetMapping
+//Returns all the user's current warehouses on the dashboard landing page
+    @GetMapping("/index")
     public List <String> findAllWarehouses(){
 
        return warehouseService.findAllWarehouses();

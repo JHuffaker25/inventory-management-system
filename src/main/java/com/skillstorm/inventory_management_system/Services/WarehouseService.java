@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class WarehouseService {
     
-    public LinkedList <String> findAllWarehouses(){
+    //public LinkedList <String> findAllWarehouses(){
 
         
         
-    }
+   // }
 
 }
