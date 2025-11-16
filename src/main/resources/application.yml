@@ -1,7 +1,11 @@
 spring:
     application:
         name: inventory-management-system
-
+    
+    datasource:
+        url: jdbc:postgresql://localhost:5432/warehouses
+        username: postgres
+        password: DataTab
     
 
     output:

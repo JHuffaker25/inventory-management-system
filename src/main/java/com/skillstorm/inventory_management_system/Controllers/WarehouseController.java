@@ -11,7 +11,7 @@ import com.skillstorm.inventory_management_system.InventoryManagementSystemAppli
 import com.skillstorm.inventory_management_system.Services.WarehouseService;
 
 @RestController
-@RequestMapping("/index")
+@RequestMapping("/warehouse")
 public class WarehouseController {
 
     private final WarehouseService warehouseService;
@@ -20,14 +20,5 @@ public class WarehouseController {
         this.warehouseService = warehouseService;
     }
 
-    
-
-//Returns all the user's current warehouses on the dashboard landing page
-    @GetMapping("/index")
-    public List <String> findAllWarehouses(){
-
-       return warehouseService.findAllWarehouses();
-
-    }
 
 }
