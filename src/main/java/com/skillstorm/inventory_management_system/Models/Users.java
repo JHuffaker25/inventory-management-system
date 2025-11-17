@@ -2,6 +2,8 @@ package com.skillstorm.inventory_management_system.Models;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,9 +11,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
-public class User {
+@Table(name="users")
+public class Users {
     
     //Fields////////////////////////////////////////////////
     @Id
@@ -25,16 +29,17 @@ public class User {
     @Column (name= "last_name")
     private String lastName;
 
-    @OneToMany (targetEntity = Warehouse.class, mappedBy = "user")
+    @OneToMany (targetEntity = Warehouse.class, mappedBy = "users")
+    @JsonIgnore
     private Set<Warehouse> warehouses;
 
     
     //Boilerplate///////////////////////////////////////////////////
-    public User() {
+    public Users() {
     }
 
 
-    public User(long userId, String firstName, String lastName, Set<Warehouse> warehouses) {
+    public Users(long userId, String firstName, String lastName, Set<Warehouse> warehouses) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -42,7 +47,7 @@ public class User {
     }
 
 
-    public User(String firstName, String lastName, Set<Warehouse> warehouses) {
+    public Users(String firstName, String lastName, Set<Warehouse> warehouses) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.warehouses = warehouses;
@@ -109,7 +114,7 @@ public class User {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        User other = (User) obj;
+        Users other = (Users) obj;
         if (userId != other.userId)
             return false;
         if (firstName == null) {

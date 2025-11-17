@@ -5,11 +5,8 @@ import java.util.LinkedList;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserService {
+public class UsersService {
     
-    //Returns all a user's warehouses
-    public LinkedList <String> findAllWarehouses(){
-        
-   }
+
 
 }

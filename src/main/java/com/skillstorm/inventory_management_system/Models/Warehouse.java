@@ -2,6 +2,8 @@ package com.skillstorm.inventory_management_system.Models;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,8 +12,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="warehouse")
 public class Warehouse {
     
     //Fields//////////////////////////////////////////////
@@ -22,7 +26,7 @@ public class Warehouse {
 
     @ManyToOne 
     @JoinColumn (name = "user_id")
-    private User user;
+    private Users users;
 
     @Column (name = "name")
     private String name;
@@ -34,6 +38,7 @@ public class Warehouse {
     private long maxCapacity;
 
     @OneToMany (targetEntity = Section.class, mappedBy = "warehouse")
+    @JsonIgnore
     private Set<Section> sections;
 
 
@@ -44,10 +49,10 @@ public class Warehouse {
 
 
 
-     public Warehouse(long warehouseId, User user, String name, String location, long maxCapacity,
+     public Warehouse(long warehouseId, Users users, String name, String location, long maxCapacity,
             Set<Section> sections) {
         this.warehouseId = warehouseId;
-        this.user = user;
+        this.users = users;
         this.name = name;
         this.location = location;
         this.maxCapacity = maxCapacity;
@@ -77,14 +82,14 @@ public class Warehouse {
 
 
 
-     public User getUser() {
-         return user;
+     public Users getUsers() {
+         return users;
      }
 
 
 
-     public void setUser(User user) {
-         this.user = user;
+     public void setUser(Users users) {
+         this.users = users;
      }
 
 
@@ -142,7 +147,7 @@ public class Warehouse {
         final int prime = 31;
         int result = 1;
         result = prime * result + (int) (warehouseId ^ (warehouseId >>> 32));
-        result = prime * result + ((user == null) ? 0 : user.hashCode());
+        result = prime * result + ((users == null) ? 0 : users.hashCode());
         result = prime * result + ((name == null) ? 0 : name.hashCode());
         result = prime * result + ((location == null) ? 0 : location.hashCode());
         result = prime * result + (int) (maxCapacity ^ (maxCapacity >>> 32));
@@ -163,10 +168,10 @@ public class Warehouse {
         Warehouse other = (Warehouse) obj;
         if (warehouseId != other.warehouseId)
             return false;
-        if (user == null) {
-            if (other.user != null)
+        if (users == null) {
+            if (other.users != null)
                 return false;
-        } else if (!user.equals(other.user))
+        } else if (!users.equals(other.users))
             return false;
         if (name == null) {
             if (other.name != null)
@@ -192,7 +197,7 @@ public class Warehouse {
 
      @Override
      public String toString() {
-        return "Warehouse [warehouseId=" + warehouseId + ", user=" + user + ", name=" + name + ", location=" + location
+        return "Warehouse [warehouseId=" + warehouseId + ", user=" + users + ", name=" + name + ", location=" + location
                 + ", maxCapacity=" + maxCapacity + "]";
      }
 
