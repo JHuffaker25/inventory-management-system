@@ -20,7 +20,7 @@ public class WarehouseService {
 
 
 
-    //Returns all a user's warehouses
+    //RETURNS all a user's warehouses
     public List<Warehouse> findAllWarehouses(){
         
        return warehouseRepository.findAll();
@@ -29,7 +29,7 @@ public class WarehouseService {
 
 
 
-   //Returns list of warehouses of a particular name
+   //RETURNS list of warehouses of a particular name
     public List<Warehouse> findWarehousesByName(String name){
         
        return warehouseRepository.findByNameContainingIgnoreCase(name);
@@ -37,5 +37,12 @@ public class WarehouseService {
    }
 
 
+
+   //ADDS a new Warehouse to the database
+   public Warehouse createNewWarehouse(Warehouse warehouse){
+
+       return warehouseRepository.save(warehouse);
+
+   }
 
 }

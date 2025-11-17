@@ -27,4 +27,18 @@ public class ProductService {
    }
 
    
+
+   //Returns list of warehouses of a particular name
+    public List<Product> findProductByName(String name){
+        
+       return productRepository.findByNameContainingIgnoreCase(name);
+
+   }
+
+
+   public Product createNewProduct(Product product){
+
+       return productRepository.save(product);
+
+   }
 }

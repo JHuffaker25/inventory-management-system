@@ -9,11 +9,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skillstorm.inventory_management_system.InventoryManagementSystemApplication;
+import com.skillstorm.inventory_management_system.Models.Product;
 import com.skillstorm.inventory_management_system.Models.Warehouse;
 import com.skillstorm.inventory_management_system.Services.WarehouseService;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 @RequestMapping ("/index")
@@ -64,7 +69,29 @@ public class WarehouseController {
 
       }
     }
-
+    
     
 
-}
+    //REQUEST to ADD a new Warehouse
+    @PostMapping
+    public ResponseEntity<Warehouse> createNewWarehouse(@RequestBody Warehouse warehouse) {
+        
+        try {
+
+          return new ResponseEntity<>(warehouseService.createNewWarehouse(warehouse), HttpStatus.OK);
+
+      } catch (IllegalArgumentException e) {
+
+         return ResponseEntity.badRequest().header("Error", "An incorrect value was entered").body(null);
+
+      }catch (Exception e) {
+
+         return ResponseEntity.internalServerError().header("Error", "There was an internal server error").body(null);
+
+      }
+
+    }
+    
+
+
+  }
