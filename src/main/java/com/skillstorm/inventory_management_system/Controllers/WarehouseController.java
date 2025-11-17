@@ -1,11 +1,13 @@
 package com.skillstorm.inventory_management_system.Controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,20 +27,44 @@ public class WarehouseController {
 
 
 
-    //Shows all user's current warehouses on the dashboard landing page
+    //REQUESTS all user's current warehouses on the dashboard landing page
     @GetMapping
     public ResponseEntity<List<Warehouse>> findAllWarehouses(){
 
       try {
 
-        List<Warehouse> warehouses = warehouseService.findAllWarehouses();
-        return new ResponseEntity<>(warehouses, HttpStatus.OK);
+          List<Warehouse> warehouses = warehouseService.findAllWarehouses();
+          return new ResponseEntity<>(warehouses, HttpStatus.OK);
 
       } catch (Exception e) {
 
-        return ResponseEntity.internalServerError().header("Error", "There was an internal server error").body(null);
+          return ResponseEntity.internalServerError().header("Error", "There was an internal server error").body(null);
 
       }
     }
+
+
+
+    //REQUESTS current user's warehouses by name
+    @GetMapping ("/name/{name}")
+    public ResponseEntity<List<Warehouse>> findWarehousesByName(@PathVariable String name){
+
+      try {
+
+          List <Warehouse> warehouses = warehouseService.findWarehousesByName(name);
+          return new ResponseEntity<>(warehouses, HttpStatus.OK);
+
+      } catch (IllegalArgumentException e) {
+
+         return ResponseEntity.badRequest().header("Error", "There were no warehouse matches found").body(null);
+
+      }catch (Exception e) {
+
+         return ResponseEntity.internalServerError().header("Error", "There was an internal server error").body(null);
+
+      }
+    }
+
+    
 
 }
