@@ -68,7 +68,7 @@ private final ProductService productService;
 
 
 
-      //REQUEST to ADD a new Warehouse
+    //REQUEST to ADD a new Warehouse
     @PostMapping
     public ResponseEntity<Product> createNewProduct(@RequestBody Product product) {
         

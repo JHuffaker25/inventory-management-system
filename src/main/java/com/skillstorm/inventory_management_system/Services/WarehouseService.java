@@ -45,4 +45,13 @@ public class WarehouseService {
 
    }
 
+
+
+   //UPDATES an existing Warehouse name
+   public String updateWarehouseName (String oldName, String newName){
+
+        return warehouseRepository.updateWarehouseName(oldName, newName); 
+
+   }
+
 }

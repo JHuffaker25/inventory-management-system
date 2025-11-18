@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,6 +19,8 @@ import com.skillstorm.inventory_management_system.Models.Warehouse;
 import com.skillstorm.inventory_management_system.Services.WarehouseService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 @RestController
@@ -78,7 +81,7 @@ public class WarehouseController {
         
         try {
 
-          return new ResponseEntity<>(warehouseService.createNewWarehouse(warehouse), HttpStatus.OK);
+          return new ResponseEntity<>(warehouseService.createNewWarehouse(warehouse), HttpStatus.CREATED);
 
       } catch (IllegalArgumentException e) {
 
@@ -93,5 +96,27 @@ public class WarehouseController {
     }
     
 
+      //REQUEST to update a warehouse name
+      @PutMapping("/warehouse/rename/{oldName}")
+      public ResponseEntity<String> updateWarehouseName (@PathVariable String oldName, @RequestParam String newName){
+        
+          try {
 
+          return new ResponseEntity<>(warehouseService.updateWarehouseName(oldName, newName), HttpStatus.NO_CONTENT);
+
+      } catch (IllegalArgumentException e) {
+
+         return ResponseEntity.badRequest().header("Error", "An incorrect value was entered").body(null);
+
+      }catch (Exception e) {
+
+         return ResponseEntity.internalServerError().header("Error", "There was an internal server error").body(null);
+
+      }
+
+      }
+          
+
+      
+      
   }
