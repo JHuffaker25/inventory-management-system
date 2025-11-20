@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Atma:wght@700&display=swap" rel="stylesheet">
 
-    <script src="inventory-management-system\src\main\resources\static\HTML\index.js" defer></script>
+    <script src="inventory-management-system/src/main/resources/static/HTML/index.js" defer></script>
 
     <style>
         .atma-bold {
@@ -29,9 +29,6 @@
 
     </style>
 </head>
-
-
-
 
 
 
@@ -55,39 +52,57 @@
 </header>
 
 
+<body>
 
     <main>
-        <h2 class = "mt-5 mb-2 text-center" >My Warehouses</h2>
+        <div class="container-fluid mt-5 mb-2">
+            <div class="w-50 ms-5">
 
-        <div>
-            <table class = "table table-striped table-bordered w-50 mx-auto">
-                <thead>
-                    <tr>
-                        <th scope="col"></th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Location</th>
-                        <th scope="col">Max Capacity</th>
+                <h2 class="text-center">My Warehouses</h2>
 
+                <table class = "table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Location</th>
+                            <th scope="col">Max Capacity</th>
 
-                    </tr>
-                </thead>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
 
-                 <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                </tbody>
-            </table>
+                    <tbody id='warehouses-table-body'>
+                        
+                    </tbody>
+                </table>
+
+                <h4 class="text-center">Add New Warehouse</h4>
+
+                <form id="new-warehouse-form" action="#">
+                    <div class="form-group">
+                        <label for="new-warehouse-name">Name</label>
+                        <input id="new-warehouse-name" name="new-warehouse-name" type="text" class="form-control form-control-sm"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="new-location">Location</label>
+                        <input id="new-location" name="new-location" type="text" class="form-control form-control-sm"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="new-max-capacity">Max Capacity</label>
+                        <input id="new-max-capacity" name="new-max-capacity" type="text" class="form-control form-control-sm"/>
+                    </div>
+
+                    <div class="form-group">
+                        <input id="save-warehouse" name="save-warehouse" type="submit" value="save" class= "btn btn-success"/>
+                    </div>
+
+            </div>
         </div>
-        
-
-        </table>
-
     </main>
-
 
 
 </body>
