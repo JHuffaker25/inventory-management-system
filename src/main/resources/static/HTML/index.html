@@ -13,12 +13,19 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" 
         rel="stylesheet" 
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Atma:wght@700&display=swap" rel="stylesheet">
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" 
+        crossorigin="anonymous">
 
-    <script src="inventory-management-system/src/main/resources/static/HTML/index.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atma:wght@700&display=swap" rel="stylesheet">
+    
+
+    <script src="index.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
+    crossorigin="anonymous"></script>
+
 
     <style>
         .atma-bold {
@@ -26,7 +33,6 @@
             font-weight: 700;
             font-style: normal;
 }
-
     </style>
 </head>
 
@@ -34,7 +40,6 @@
 
 <header>
     <div class="container text-center mt-5">
-
        <div class="border atma-bold" style = "border-width: 10px !important; border-color: rgb(196, 152, 237) !important;">
              <h1>Fun & Games Warehouses</h1>
        </div>
@@ -46,64 +51,144 @@
         class="img-fluid"
         >
        </div>
-
     </div>
-
 </header>
 
 
 <body>
 
     <main>
+
+        <!-- Container for BOTH tables -->
         <div class="container-fluid mt-5 mb-2">
-            <div class="w-50 ms-5">
+            
+            <div class="row">
+                
+                <!-- Warehouses Table -->
+                <div class="col-md-6">
+                    <h2 class="text-center">My Warehouses</h2>
 
-                <h2 class="text-center">My Warehouses</h2>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Location</th>
+                                <th>Max Capacity</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody id="warehouses-table-body">
+                            <!-- Table body filled by JS -->
+                        </tbody>
+                    </table>
 
-                <table class = "table table-striped table-bordered">
-                    <thead>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Location</th>
-                            <th scope="col">Max Capacity</th>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#warehouse-add-modal">
+                        Add Warehouse 
+                    </button>
 
-                            <th>Edit</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
+                </div>
 
-                    <tbody id='warehouses-table-body'>
+                
+                
+
+                <!-- Products Table-->
+                <div class="col-md-6">
+                    <h2 class="text-center">Products</h2>
+
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Sku</th>
+                                <th>Quantity</th>
+                                <th>Description</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
                         
-                    </tbody>
-                </table>
+                        <tbody id="products-table-body">
+                            <!-- Table body filled by JS -->
+                        </tbody>
+                    </table>
 
-                <h4 class="text-center">Add New Warehouse</h4>
+                    <h4 class="text-center">Add New Product</h4>
 
-                <form id="new-warehouse-form" action="#">
-                    <div class="form-group">
-                        <label for="new-warehouse-name">Name</label>
-                        <input id="new-warehouse-name" name="new-warehouse-name" type="text" class="form-control form-control-sm"/>
-                    </div>
+                    <form id="new-product-form">
+                        <div class="form-group">
+                            <label for="new-product-warehouse">Warehouse</label>
+                            <input id="new-product-warehouse" class="form-control form-control-sm" />
+                        </div>
 
-                    <div class="form-group">
-                        <label for="new-location">Location</label>
-                        <input id="new-location" name="new-location" type="text" class="form-control form-control-sm"/>
-                    </div>
+                        <div class="form-group">
+                            <label for="new-product-section">Section</label>
+                            <input id="new-product-section" class="form-control form-control-sm" />
+                        </div>
 
-                    <div class="form-group">
-                        <label for="new-max-capacity">Max Capacity</label>
-                        <input id="new-max-capacity" name="new-max-capacity" type="text" class="form-control form-control-sm"/>
-                    </div>
+                        <div class="form-group">
+                            <label for="new-product-name">Name</label>
+                            <input id="new-product-name" class="form-control form-control-sm" />
+                        </div>
 
-                    <div class="form-group">
-                        <input id="save-warehouse" name="save-warehouse" type="submit" value="save" class= "btn btn-success"/>
-                    </div>
+                        <div class="form-group">
+                            <label for="new-sku">Sku</label>
+                            <input id="new-sku" class="form-control form-control-sm" />
+                        </div>
 
+                        <div class="form-group">
+                            <label for="new-quantity">Quantity</label>
+                            <input id="new-quantity" class="form-control form-control-sm" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="new-description">Description</label>
+                            <input id="new-description" class="form-control form-control-sm" />
+                        </div>
+
+                        <input type="submit" value="Save" class="btn btn-success mt-2" />
+                    </form>
+
+                </div>
             </div>
         </div>
-    </main>
 
+    <!-- Edit Warehouse Modal -->
+    <div class="modal fade" id="warehouse-add-modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="warehouse-edit-modal-label">Add New Warehouse</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            <div class="modal-body">
+                <form id="new-warehouse-form">
+                        <div class="form-group">
+                            <label for="new-warehouse-name">Name</label>
+                            <input id="new-warehouse-name" class="form-control form-control-sm" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="new-location">Location</label>
+                            <input id="new-location" class="form-control form-control-sm" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="new-max-capacity">Max Capacity</label>
+                            <input id="new-max-capacity" class="form-control form-control-sm" />
+                        </div>
+                        
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success" form="new-warehouse-form">Save</button>
+
+            </div>
+         </div>
+        </div>
+    </div>
+</main>
 
 </body>
 

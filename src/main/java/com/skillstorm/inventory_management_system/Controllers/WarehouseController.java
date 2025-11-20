@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -78,7 +79,7 @@ public class WarehouseController {
     
 
     //REQUEST to ADD a new Warehouse
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity<Warehouse> createNewWarehouse(@RequestBody Warehouse warehouse) {
         
         try {
@@ -99,7 +100,7 @@ public class WarehouseController {
     
 
       //REQUEST to update a warehouse name
-      @PutMapping("/warehouse/rename/{oldName}")
+      @PutMapping("/edit/{oldName}")
       public ResponseEntity<String> updateWarehouseName (@PathVariable String oldName, @RequestParam String newName){
         
           try {
@@ -117,6 +118,23 @@ public class WarehouseController {
       }
 
       }
+
+
+      /*REQUEST to delete a warehouse 
+      @DeleteMapping("/delete/{id}")
+      public ResponseEntity<String> deleteWarehouse (@PathVariable long id){
+        
+          try {
+
+          return new ResponseEntity<>(warehouseService.deleteWarehouse(id), HttpStatus.NO_CONTENT);
+
+      } catch (Exception e) {
+
+         return ResponseEntity.internalServerError().header("Error", "There was an internal server error").body(null);
+
+      }
+
+      }*/
           
 
       

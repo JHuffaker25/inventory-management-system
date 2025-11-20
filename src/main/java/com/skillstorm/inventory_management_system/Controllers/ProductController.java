@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -70,8 +71,8 @@ private final ProductService productService;
 
 
 
-    //REQUEST to ADD a new Warehouse
-    @PostMapping
+    //REQUEST to ADD a new product
+    @PostMapping ("/add")
     public ResponseEntity<Product> createNewProduct(@RequestBody Product product) {
         
         try {
@@ -89,6 +90,25 @@ private final ProductService productService;
       }
 
   }
+
+
+
+  //REQUEST to delete a product
+      @DeleteMapping("/delete/{id}")
+      public ResponseEntity<Void> deleteProduct (@PathVariable long id){
+        
+          try {
+
+            productService.deleteProductById(id);
+            return ResponseEntity.noContent().build();
+
+      } catch (Exception e) {
+
+         return ResponseEntity.internalServerError().header("Error", "There was an internal server error").body(null);
+
+      }
+
+      }
 
 }
     

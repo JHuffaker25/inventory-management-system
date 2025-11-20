@@ -20,7 +20,7 @@ public class ProductService {
 
 
     
-    //Returns all a user's warehouses
+    //Returns all a user's products
     public List<Product> findAllProducts(){
 
        return productRepository.findAll();
@@ -28,17 +28,28 @@ public class ProductService {
 
    
 
-   //Returns list of warehouses of a particular name
+   //Returns list of products of a particular name
     public List<Product> findProductByName(String name){
         
        return productRepository.findByNameContainingIgnoreCase(name);
 
    }
 
+   
 
+   //Creates new product
    public Product createNewProduct(Product product){
 
        return productRepository.save(product);
 
    }
+
+
+   //Deletes a product
+   public void deleteProductById(long id){
+
+       productRepository.deleteById(id);
+
+   }
+   
 }
