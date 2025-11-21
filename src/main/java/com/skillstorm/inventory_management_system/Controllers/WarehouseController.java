@@ -101,12 +101,12 @@ public class WarehouseController {
     
 
       //REQUEST to update a warehouse
-      @PutMapping("/edit/{id}")
-      public ResponseEntity<Warehouse> updateWarehouse (@PathVariable long id, @RequestBody Warehouse updatedWarehouse ){
+      @PutMapping("/rename/{id}")
+      public ResponseEntity<Warehouse> updateWarehouse (@PathVariable long id, @RequestParam ("new_name") String newName ){
         
           try {
 
-          return new ResponseEntity<Warehouse>(warehouseService.updateWarehouse(id, updatedWarehouse), HttpStatus.OK);
+          return new ResponseEntity<Warehouse>(warehouseService.updateWarehouse(id, newName), HttpStatus.OK);
 
       } catch (IllegalArgumentException e) {
 

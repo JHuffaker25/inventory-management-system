@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skillstorm.inventory_management_system.Models.Product;
@@ -91,6 +93,28 @@ private final ProductService productService;
 
   }
 
+
+
+//REQUEST to update a product
+      @PutMapping("/rename/{id}")
+      public ResponseEntity<Void> updateProduct (@PathVariable long id, @RequestParam ("new_name") String newName ){
+        
+          try {
+
+           productService.updateProduct(id, newName); 
+            return ResponseEntity.ok().build();
+
+      } catch (IllegalArgumentException e) {
+
+         return ResponseEntity.badRequest().header("Error", "An incorrect value was entered").body(null);
+
+      }catch (Exception e) {
+
+         return ResponseEntity.internalServerError().header("Error", "There was an internal server error").body(null);
+
+      }
+
+      }
 
 
   //REQUEST to delete a product

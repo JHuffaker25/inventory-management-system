@@ -86,6 +86,82 @@ document.getElementById('new-product-form').addEventListener('submit', (event)=>
 })
 
 
+//LISTENER called on UPDATE product form submit
+/*document.getElementById('rename-product-form').addEventListener('submit', (event)=>{
+
+    let inputData = new FormData(document.getElementById('rename-product-form'))
+
+    event.preventDefault()
+
+    console.log("Form submitted!")
+
+    let updatedProduct = {
+        
+        name: inputData.get('new-product-name'),
+        
+    }
+
+    updateProduct(updatedProduct)
+})*/
+
+
+//FUNCTION to add each warehouse to warehouses table
+function addWarehouseToTable(newWarehouse){
+    let tr = document.createElement ('tr')
+    let name = document.createElement ('td')
+    let location = document.createElement ('td')
+    let capacity = document.createElement ('td')
+   // let editBtn = document.createElement ('td')
+    let deleteBtn = document.createElement ('td')
+
+    name.innerText = newWarehouse.name
+    location.innerText = newWarehouse.location
+    capacity.innerText = newWarehouse.maxCapacity
+   // editBtn.innerHTML = `<button class="btn btn-info" id="warehouse-edit-button" onclick="activateWarehouseEdit(${newWarehouse.warehouseId})"> EDIT </button>`
+    deleteBtn.innerHTML = `<button class="btn btn-danger" id="warehouse-delete-button" onclick="activateWarehouseDelete(${newWarehouse.warehouseId}, this)"> DELETE </button>`
+
+    tr.appendChild(name)
+    tr.appendChild(location)
+    tr.appendChild(capacity)
+   // tr.appendChild(editBtn)
+    tr.appendChild(deleteBtn)
+
+    document.getElementById('warehouses-table-body').appendChild(tr)
+
+    allWarehouses.push(newWarehouse)
+}
+
+
+//FUNCTION to add each product to products table
+function addProductToTable(newProduct){
+    let tr = document.createElement ('tr')
+    let name = document.createElement ('td')
+    let sku = document.createElement ('td')
+    let quantity = document.createElement ('td')
+    let description = document.createElement ('td')
+    //let editBtn = document.createElement ('td')
+    let deleteBtn = document.createElement ('td')
+
+    name.innerText = newProduct.name
+    sku.innerText = newProduct.sku
+    quantity.innerText = newProduct.quantity
+    description.innerText = newProduct.description
+  // editBtn.innerHTML = `<button type= "button" class="btn btn-info" id="product-edit-button" data-bs-toggle="modal" data-bs-target="#rename-product-modal"> RENAME </button>`
+    deleteBtn.innerHTML = `<button class="btn btn-danger" id="product-delete-button" onclick="activateProductDelete(${newProduct.productId}, this)"> DELETE </button>`
+
+    tr.appendChild(name)
+    tr.appendChild(sku)
+    tr.appendChild(quantity)
+    tr.appendChild(description)
+   //tr.appendChild(editBtn)
+    tr.appendChild(deleteBtn)
+
+    document.getElementById('products-table-body').appendChild(tr)
+
+    allProducts.push(newProduct)
+}
+
+
 //POST FUNCTION to add new warehouse
 async function addNewWarehouse(newWarehouse) {
     
@@ -129,63 +205,26 @@ async function addNewProduct(newProduct) {
 
 }
 
+//PUT FUNCTION to update Product
+/*async function updateProduct(updatedProduct) {
+    
+    let returnedData = await fetch(allProductsURL + '/add', {
 
-//FUNCTION to add each warehouse to warehouses table
-function addWarehouseToTable(newWarehouse){
-    let tr = document.createElement ('tr')
-    let name = document.createElement ('td')
-    let location = document.createElement ('td')
-    let capacity = document.createElement ('td')
-    let editBtn = document.createElement ('td')
-    let deleteBtn = document.createElement ('td')
+        method: 'PUT',
+        headers: {
+            'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify(updatedProduct)
 
-    name.innerText = newWarehouse.name
-    location.innerText = newWarehouse.location
-    capacity.innerText = newWarehouse.maxCapacity
-    editBtn.innerHTML = `<button class="btn btn-info" id="warehouse-edit-button" onclick="activateWarehouseEdit(${newWarehouse.warehouseId})"> EDIT </button>`
-    deleteBtn.innerHTML = `<button class="btn btn-danger" id="warehouse-delete-button" onclick="activateWarehouseDelete(${newWarehouse.warehouseId}, this)"> DELETE </button>`
+    })
 
-    tr.appendChild(name)
-    tr.appendChild(location)
-    tr.appendChild(capacity)
-    tr.appendChild(editBtn)
-    tr.appendChild(deleteBtn)
+    let productJson = await returnedData.json()
 
-    document.getElementById('warehouses-table-body').appendChild(tr)
-
-    allWarehouses.push(newWarehouse)
-}
+    
 
 
-//FUNCTION to add each product to products table
-function addProductToTable(newProduct){
-    let tr = document.createElement ('tr')
-    let name = document.createElement ('td')
-    let sku = document.createElement ('td')
-    let quantity = document.createElement ('td')
-    let description = document.createElement ('td')
-    let editBtn = document.createElement ('td')
-    let deleteBtn = document.createElement ('td')
 
-    name.innerText = newProduct.name
-    sku.innerText = newProduct.sku
-    quantity.innerText = newProduct.quantity
-    description.innerText = newProduct.description
-    editBtn.innerHTML = `<button class="btn btn-info" id="product-edit-button" onclick="activateProductEdit(${newProduct.productId}, this)"> EDIT </button>`
-    deleteBtn.innerHTML = `<button class="btn btn-danger" id="product-delete-button" onclick="activateProductDelete(${newProduct.productId}, this)"> DELETE </button>`
-
-    tr.appendChild(name)
-    tr.appendChild(sku)
-    tr.appendChild(quantity)
-    tr.appendChild(description)
-    tr.appendChild(editBtn)
-    tr.appendChild(deleteBtn)
-
-    document.getElementById('products-table-body').appendChild(tr)
-
-    allProducts.push(newProduct)
-}
-
+}*/
 
 
 function activateWarehouseEdit(){

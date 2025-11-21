@@ -19,4 +19,12 @@ public interface WarehouseRepository extends JpaRepository<Warehouse, Long>{
 
 
 
+        //QUERIES Database to update the warehouse name
+        @Query("update Warehouse w set w.name=:name where w.warehouseId= :warehouseId")
+        @Modifying
+        @Transactional
+        public Warehouse updateName(@Param("warehouseId") long id, @Param("name") String name);
+
 }
+
+    

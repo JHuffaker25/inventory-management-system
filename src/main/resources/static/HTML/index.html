@@ -78,7 +78,7 @@
                                 <th>Name</th>
                                 <th>Location</th>
                                 <th>Max Capacity</th>
-                                <th>Edit</th>
+                                
                                 <th>Delete</th>
                             </tr>
                         </thead>
@@ -108,7 +108,7 @@
                                 <th>Sku</th>
                                 <th>Quantity</th>
                                 <th>Description</th>
-                                <th>Edit</th>
+                                
                                 <th>Delete</th>
                             </tr>
                         </thead>
@@ -188,6 +188,31 @@
                         <div class="form-group">
                             <label for="new-description">Description</label>
                             <input id="new-description" name="new-description"class="form-control form-control-sm" />
+                        </div>
+                    </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success" data-bs-dismiss="modal" form="new-product-form">Save</button>
+            </div>
+         </div>
+        </div>
+    </div>
+
+    <!-- Rename Product Modal -->
+    <div class="modal fade" id="rename-product-modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="rename-product-modal-label">Rename Product</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            <div class="modal-body">
+                <form id="rename-product-form">
+
+                        <div class="form-group">
+                            <label for="updated-product-name">Name</label>
+                            <input id="updated-product-name" name="updated-product-name" class="form-control form-control-sm" />
                         </div>
                     </form>
             </div>

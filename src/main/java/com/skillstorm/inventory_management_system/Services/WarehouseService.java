@@ -49,17 +49,9 @@ public class WarehouseService {
 
 
    //UPDATES an existing Warehouse 
-   public Warehouse updateWarehouse (long id, Warehouse updatedWarehouse){
+   public Warehouse updateWarehouse (long id, String newName){
 
-        Warehouse existing = warehouseRepository.findById(id).orElseThrow(() -> new RuntimeException("Warehouse not found"));;
-
-
-        existing.setName(updatedWarehouse.getName());
-        existing.setLocation(updatedWarehouse.getLocation());
-        existing.setMaxCapacity(updatedWarehouse.getMaxCapacity());
-
-
-        return warehouseRepository.save(existing);
+       return warehouseRepository.updateName(id, newName);
 
    }
 

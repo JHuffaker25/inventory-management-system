@@ -44,6 +44,13 @@ public class ProductService {
 
    }
 
+//UPDATES an existing Product
+   public Void updateProduct (long id, String newName){
+
+       return productRepository.updateName(id, newName);
+
+   }
+
 
    //Deletes a product
    public void deleteProductById(long id){
