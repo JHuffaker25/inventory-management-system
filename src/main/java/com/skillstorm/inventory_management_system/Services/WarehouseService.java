@@ -2,6 +2,7 @@ package com.skillstorm.inventory_management_system.Services;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,10 +48,27 @@ public class WarehouseService {
 
 
 
-   //UPDATES an existing Warehouse name
-   public String updateWarehouseName (String oldName, String newName){
+   //UPDATES an existing Warehouse 
+   public Warehouse updateWarehouse (long id, Warehouse updatedWarehouse){
 
-        return warehouseRepository.updateWarehouseName(oldName, newName); 
+        Warehouse existing = warehouseRepository.findById(id).orElseThrow(() -> new RuntimeException("Warehouse not found"));;
+
+
+        existing.setName(updatedWarehouse.getName());
+        existing.setLocation(updatedWarehouse.getLocation());
+        existing.setMaxCapacity(updatedWarehouse.getMaxCapacity());
+
+
+        return warehouseRepository.save(existing);
+
+   }
+
+
+
+   //Deletes an existing Warehouse 
+   public void deleteWarehouseById (long id){
+
+        warehouseRepository.deleteById(id);
 
    }
 

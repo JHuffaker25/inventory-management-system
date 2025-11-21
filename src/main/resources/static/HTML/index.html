@@ -68,6 +68,10 @@
                 <div class="col-md-6">
                     <h2 class="text-center">My Warehouses</h2>
 
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#warehouse-add-modal">
+                        Add Warehouse 
+                    </button>
+
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
@@ -83,9 +87,6 @@
                         </tbody>
                     </table>
 
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#warehouse-add-modal">
-                        Add Warehouse 
-                    </button>
 
                 </div>
 
@@ -95,6 +96,10 @@
                 <!-- Products Table-->
                 <div class="col-md-6">
                     <h2 class="text-center">Products</h2>
+
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#product-add-modal">
+                        Add Product 
+                    </button>
 
                     <table class="table table-striped table-bordered">
                         <thead>
@@ -113,81 +118,87 @@
                         </tbody>
                     </table>
 
-                    <h4 class="text-center">Add New Product</h4>
-
-                    <form id="new-product-form">
-                        <div class="form-group">
-                            <label for="new-product-warehouse">Warehouse</label>
-                            <input id="new-product-warehouse" class="form-control form-control-sm" />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="new-product-section">Section</label>
-                            <input id="new-product-section" class="form-control form-control-sm" />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="new-product-name">Name</label>
-                            <input id="new-product-name" class="form-control form-control-sm" />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="new-sku">Sku</label>
-                            <input id="new-sku" class="form-control form-control-sm" />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="new-quantity">Quantity</label>
-                            <input id="new-quantity" class="form-control form-control-sm" />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="new-description">Description</label>
-                            <input id="new-description" class="form-control form-control-sm" />
-                        </div>
-
-                        <input type="submit" value="Save" class="btn btn-success mt-2" />
-                    </form>
-
                 </div>
             </div>
         </div>
 
-    <!-- Edit Warehouse Modal -->
+    <!-- Add Warehouse Modal -->
     <div class="modal fade" id="warehouse-add-modal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="warehouse-edit-modal-label">Add New Warehouse</h1>
+                    <h1 class="modal-title fs-5" id="warehouse-add-modal-label">Add New Warehouse</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
             <div class="modal-body">
                 <form id="new-warehouse-form">
                         <div class="form-group">
                             <label for="new-warehouse-name">Name</label>
-                            <input id="new-warehouse-name" class="form-control form-control-sm" />
+                            <input id="new-warehouse-name" name="new-warehouse-name" class="form-control form-control-sm" />
                         </div>
 
                         <div class="form-group">
                             <label for="new-location">Location</label>
-                            <input id="new-location" class="form-control form-control-sm" />
+                            <input id="new-location" name="new-location" class="form-control form-control-sm" />
                         </div>
 
                         <div class="form-group">
                             <label for="new-max-capacity">Max Capacity</label>
-                            <input id="new-max-capacity" class="form-control form-control-sm" />
+                            <input id="new-max-capacity" name="new-max-capacity" class="form-control form-control-sm" />
                         </div>
                         
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-success" form="new-warehouse-form">Save</button>
+                <button type="submit" class="btn btn-success" data-bs-dismiss="modal"form="new-warehouse-form">Save</button>
 
             </div>
          </div>
         </div>
     </div>
+
+
+    <!-- Add Product Modal -->
+    <div class="modal fade" id="product-add-modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="product-add-modal-label">Add New Product</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            <div class="modal-body">
+                <form id="new-product-form">
+
+                        <div class="form-group">
+                            <label for="new-product-name">Name</label>
+                            <input id="new-product-name" name="new-product-name" class="form-control form-control-sm" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="new-sku">Sku</label>
+                            <input id="new-sku" name="new-sku" class="form-control form-control-sm" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="new-quantity">Quantity</label>
+                            <input id="new-quantity" name ="new-quantity"class="form-control form-control-sm" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="new-description">Description</label>
+                            <input id="new-description" name="new-description"class="form-control form-control-sm" />
+                        </div>
+                    </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-success" data-bs-dismiss="modal" form="new-product-form">Save</button>
+            </div>
+         </div>
+        </div>
+    </div>
+
 </main>
 
 </body>

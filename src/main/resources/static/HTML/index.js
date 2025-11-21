@@ -1,6 +1,6 @@
-//Backend Controller CRUD URLs
+//Backend Controller URLs to GET all table data
 const allWarehousesURL = 'http://localhost:8282/warehouses'
-const allProductsURL = 'http://localhost:8282/products';
+const allProductsURL = 'http://localhost:8282/products'
 
 //Warehouse and product lists to return
 let allWarehouses = []
@@ -43,31 +43,119 @@ document.addEventListener('DOMContentLoaded', ()=>{
 })
 
 
+//LISTENER called on ADD new warehouse form submit
+document.getElementById('new-warehouse-form').addEventListener('submit', (event)=>{
+
+    let inputData = new FormData(document.getElementById('new-warehouse-form'))
+
+    event.preventDefault()
+
+    console.log("Form submitted!")
+
+    let newWarehouse = {
+        users: {
+            userId: 1
+        },
+        name: inputData.get('new-warehouse-name'),
+        location: inputData.get('new-location'),
+        maxCapacity: inputData.get('new-max-capacity')
+    }
+
+    addNewWarehouse(newWarehouse)
+})
+
+
+//LISTENER called on ADD new product form submit
+document.getElementById('new-product-form').addEventListener('submit', (event)=>{
+
+    let inputData = new FormData(document.getElementById('new-product-form'))
+
+    event.preventDefault()
+
+    console.log("Form submitted!")
+
+    let newProduct = {
+        
+        name: inputData.get('new-product-name'),
+        sku: inputData.get('new-sku'),
+        quantity: inputData.get('new-quantity'),
+        description: inputData.get('new-description')
+    }
+
+    addNewProduct(newProduct)
+})
+
+
+//POST FUNCTION to add new warehouse
+async function addNewWarehouse(newWarehouse) {
+    
+    let returnedData = await fetch(allWarehousesURL + '/add', {
+
+        method: 'POST',
+        headers: {
+            'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify(newWarehouse)
+
+    })
+
+    let warehouseJson = await returnedData.json()
+
+    addWarehouseToTable(warehouseJson)
+
+
+
+}
+
+
+//POST FUNCTION to add new Product
+async function addNewProduct(newProduct) {
+    
+    let returnedData = await fetch(allProductsURL + '/add', {
+
+        method: 'POST',
+        headers: {
+            'Content-Type' : 'application/json'
+        },
+        body: JSON.stringify(newProduct)
+
+    })
+
+    let productJson = await returnedData.json()
+
+    addProductToTable(productJson)
+
+
+
+}
+
+
 //FUNCTION to add each warehouse to warehouses table
 function addWarehouseToTable(newWarehouse){
     let tr = document.createElement ('tr')
     let name = document.createElement ('td')
     let location = document.createElement ('td')
     let capacity = document.createElement ('td')
-    let saveBtn = document.createElement ('td')
+    let editBtn = document.createElement ('td')
     let deleteBtn = document.createElement ('td')
 
     name.innerText = newWarehouse.name
     location.innerText = newWarehouse.location
     capacity.innerText = newWarehouse.maxCapacity
-    saveBtn.innerHTML = `<button class="btn btn-info" id="warehouse-edit-button" onclick="activateWarehouseEdit(${newWarehouse.warehouseId})"> EDIT </button>`
-    deleteBtn.innerHTML = `<button class="btn btn-danger" id="warehouse-delete-button" onclick="activateWarehouseDelete(${newWarehouse.warehouseId})"> DELETE </button>`
+    editBtn.innerHTML = `<button class="btn btn-info" id="warehouse-edit-button" onclick="activateWarehouseEdit(${newWarehouse.warehouseId})"> EDIT </button>`
+    deleteBtn.innerHTML = `<button class="btn btn-danger" id="warehouse-delete-button" onclick="activateWarehouseDelete(${newWarehouse.warehouseId}, this)"> DELETE </button>`
 
     tr.appendChild(name)
     tr.appendChild(location)
     tr.appendChild(capacity)
-    tr.appendChild(saveBtn)
+    tr.appendChild(editBtn)
     tr.appendChild(deleteBtn)
 
     document.getElementById('warehouses-table-body').appendChild(tr)
 
     allWarehouses.push(newWarehouse)
 }
+
 
 //FUNCTION to add each product to products table
 function addProductToTable(newProduct){
@@ -99,6 +187,7 @@ function addProductToTable(newProduct){
 }
 
 
+
 function activateWarehouseEdit(){
 
 }
@@ -109,8 +198,29 @@ function activateProductEdit(){
 
 
 //DELETE button function for warehouse
-function activateWarehouseDelete(WarehouseId){
+function activateWarehouseDelete(warehouseId, button){
+    if (!confirm("Are you sure you want to delete this warehouse?")) {
+        return;
+    }
+        
+    fetch(`http://localhost:8282/warehouses/delete/${warehouseId}`, {
+        method: 'DELETE'
+    })
 
+    .then(response => {
+        if (response.ok) {
+            const row = button.closest('tr');
+            row.remove();
+            allWarehouses = allWarehouses.filter(p => p.warehouseId !== warehouseId);
+        } else {
+            alert("Failed to delete the warehouse.");
+        }
+    })
+
+    .catch(error => {
+        console.error("Error deleting warehouse:", error);
+        alert("An error occurred while deleting the warehouse.");
+    });
 }
 
 //DELETE button function for product

@@ -3,6 +3,7 @@ package com.skillstorm.inventory_management_system.Controllers;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.context.ApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -99,13 +100,13 @@ public class WarehouseController {
     }
     
 
-      //REQUEST to update a warehouse name
-      @PutMapping("/edit/{oldName}")
-      public ResponseEntity<String> updateWarehouseName (@PathVariable String oldName, @RequestParam String newName){
+      //REQUEST to update a warehouse
+      @PutMapping("/edit/{id}")
+      public ResponseEntity<Warehouse> updateWarehouse (@PathVariable long id, @RequestBody Warehouse updatedWarehouse ){
         
           try {
 
-          return new ResponseEntity<>(warehouseService.updateWarehouseName(oldName, newName), HttpStatus.NO_CONTENT);
+          return new ResponseEntity<Warehouse>(warehouseService.updateWarehouse(id, updatedWarehouse), HttpStatus.OK);
 
       } catch (IllegalArgumentException e) {
 
@@ -120,21 +121,22 @@ public class WarehouseController {
       }
 
 
-      /*REQUEST to delete a warehouse 
+      //REQUEST to delete a warehouse 
       @DeleteMapping("/delete/{id}")
-      public ResponseEntity<String> deleteWarehouse (@PathVariable long id){
+      public ResponseEntity<Void> deleteWarehouse (@PathVariable long id){
         
           try {
 
-          return new ResponseEntity<>(warehouseService.deleteWarehouse(id), HttpStatus.NO_CONTENT);
+            warehouseService.deleteWarehouseById(id);
+            return ResponseEntity.noContent().build();
 
-      } catch (Exception e) {
+        } catch (Exception e) {
 
-         return ResponseEntity.internalServerError().header("Error", "There was an internal server error").body(null);
+          return ResponseEntity.internalServerError().header("Error", "There was an internal server error").body(null);
+
+        } 
 
       }
-
-      }*/
           
 
       
